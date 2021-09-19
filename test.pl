@@ -1,5 +1,4 @@
 % for AZ-Prolog
-
 ikimono(X) :- sakana(X).
 ikimono(X) :- mizukusa(X).
 ikimono(X) :- plankton(X).
@@ -45,14 +44,10 @@ alldifferent([H|T]) :- \+(member(H,T)), alldifferent(T).
 doremo_tabenai(X, []).
 doremo_tabenai(X, [H|T]) :- \+(taberu(X, H)), doremo_tabenai(X, T).
 
-
 new_suiso(L1, L2) :- ikimono(X), \+(member(X, L1)), sort([X|L1],L2).
-
 
 suiso([X]) :- ikimono(X).
 suiso([H,H2|T]) :- ikimono(H), ikimono(H2), alldifferent([H,H2|T]), suiso([H2|T]).
 
-
-
-
-
+t :- bagof(X, ikimono(X), L), write(L), nl.
+u :- bagof((X,Y), suiso([X,Y]), L), write(L), nl.
