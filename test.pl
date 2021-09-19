@@ -1,3 +1,5 @@
+% for AZ-Prolog
+
 ikimono(X) :- sakana(X).
 ikimono(X) :- mizukusa(X).
 ikimono(X) :- plankton(X).
