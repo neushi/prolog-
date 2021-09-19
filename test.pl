@@ -36,18 +36,22 @@ taberu(zooplankton, phytoplankton).
 taberu(zarigani, dojo).
 taberu(zarigani, itogoke).
 taberu(zarigani, kanadamo).
-
-
+% -------------------------------
 alldifferent([]).
 alldifferent([H|T]) :- \+(member(H,T)), alldifferent(T).
+% -------------------------------
 
 doremo_tabenai(X, []).
 doremo_tabenai(X, [H|T]) :- \+(taberu(X, H)), doremo_tabenai(X, T).
 
-new_suiso(L1, L2) :- ikimono(X), \+(member(X, L1)), sort([X|L1],L2).
+dorenimo_taberarenai(X, []).
+dorenimo_taberarenai(X, [H|T]) :- \+(taberu(H, X)), dorenimo_taberarenai(X, T).
 
-suiso([X]) :- ikimono(X).
-suiso([H,H2|T]) :- ikimono(H), ikimono(H2), alldifferent([H,H2|T]), suiso([H2|T]).
+heiwa([]).
+heiwa([_]).
+heiwa([H|T]) :- doremo_tabenai(H, T), dorenimo_taberarenai(H, T), heiwa(T).
+
+tsuika(L, [New|L]) :- ikimono(New), \+(member(New, L)), doremo_tabenai(New, L), dorenimo_taberarenai(New, L).
 
 t :- bagof(X, ikimono(X), L), write(L), nl.
 u :- bagof((X,Y), suiso([X,Y]), L), write(L), nl.
