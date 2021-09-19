@@ -51,7 +51,7 @@ heiwa([]).
 heiwa([_]).
 heiwa([H|T]) :- doremo_tabenai(H, T), dorenimo_taberarenai(H, T), heiwa(T).
 
-tsuika(L, [New|L]) :- ikimono(New), \+(member(New, L)), doremo_tabenai(New, L), dorenimo_taberarenai(New, L).
+tsuika(L, [New|L]) :- ikimono(New), heiwa([New|L]).
 
 t :- bagof(X, ikimono(X), L), write(L), nl.
 u :- bagof((X,Y), suiso([X,Y]), L), write(L), nl.
