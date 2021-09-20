@@ -53,5 +53,27 @@ heiwa([H|T]) :- doremo_tabenai(H, T), dorenimo_taberarenai(H, T), heiwa(T).
 
 tsuika(L, [New|L]) :- ikimono(New), heiwa([New|L]).
 
-t :- bagof(X, ikimono(X), L), write(L), nl.
+append_each(A, [], []).
+append_each(A, [x], [[A|x]]).
+append_each(A, [H|T], [[A|H]|NT]) :- append_each(A, T, NT).
+% append_each(a, [], L).  is []
+% append_each(a, [[]], L). is [[a]]
+% append_each(a, [[],[b],[a],[g,h,j]], L).
+
+
+all_combination([], [[]]).
+all_combination([H|T], L) :- all_combination(T, L1), append_each(H, L1, L2), append(L2, L1, L) .
+% all_combination([], L).
+% all_combination([a], L).
+% all_combination([b], L).
+% all_combination([a,b,c,d,e], L).
+
+% all_combination([a,b,dc], [], L).
+
+heiwa_check([]).
+heiwa_check([H|T]) :- heiwa(H), write(H), nl, nl, heiwa_check(T).
+
+t :- bagof(X, ikimono(X), L), all_combination(L, CMBs), heiwa_check(CMBs).
+
+
 u :- bagof((X,Y), suiso([X,Y]), L), write(L), nl.
