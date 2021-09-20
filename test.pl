@@ -66,14 +66,12 @@ all_combination([H|T], L) :- all_combination(T, L1), append_each(H, L1, L2), app
 % all_combination([], L).
 % all_combination([a], L).
 % all_combination([b], L).
-% all_combination([a,b,c,d,e], L).
-
-% all_combination([a,b,dc], [], L).
+% all_combination([a,b,c,d], L).
 
 heiwa_check([]).
-heiwa_check([H|T]) :- heiwa(H), write(H), nl, nl, heiwa_check(T).
+heiwa_check([H|T]) :- repeat, heiwa(H), write(H), nl, fail.
 
-t :- bagof(X, ikimono(X), L), all_combination(L, CMBs), heiwa_check(CMBs).
+t :- bagof(X, ikimono(X), L), all_combination(L, CMBs), write(CMBs).
 
 
 u :- bagof((X,Y), suiso([X,Y]), L), write(L), nl.
