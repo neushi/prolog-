@@ -8,7 +8,7 @@ sakana(kingyo).
 sakana(medaka).
 sakana(ko_medaka).
 sakana(dojo).
-/*
+
 sakana(ebi).
 sakana(zarigani).
 
@@ -20,7 +20,7 @@ plankton(zooplankton).
 plankton(phytoplankton).
 
 bacteria(photosynthetic_bacteria).
-*/
+
 
 % reconsult('C:\Users\a3kur\Desktop\保存\test.pl').
 % -------------------------------
@@ -68,10 +68,11 @@ all_combination([H|T], L) :- all_combination(T, L1), append_each(H, L1, L2), app
 % all_combination([b], L).
 % all_combination([a,b,c,d], L).
 
-heiwa_check([]).
-heiwa_check([H|T]) :- repeat, heiwa(H), write(H), nl, fail.
+heiwa_check([],[]).
+heiwa_check([H|T],[H|To]) :- heiwa(H), !, heiwa_check(T,To).
+heiwa_check([H|T],To) :- !, heiwa_check(T,To).
 
-t :- bagof(X, ikimono(X), L), all_combination(L, CMBs), write(CMBs).
+t(O) :- bagof(X, ikimono(X), L), all_combination(L, CMBs), heiwa_check(CMBs, O).
 
 
 u :- bagof((X,Y), suiso([X,Y]), L), write(L), nl.
